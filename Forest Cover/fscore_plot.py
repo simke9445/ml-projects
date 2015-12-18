@@ -8,24 +8,16 @@ from sklearn.preprocessing import label_binarize
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import average_precision_score
 
-def fscore_plot(estimator, X, y):
+def fscore_plot(classifier, X_test, y_test):
 
 
     # Binarize the output
-    n_classes = max(y) - min(y) + 1
-    y = label_binarize(y, classes=list(range(0,n_classes)))
-   
+    n_classes = max(y_test) - min(y_test) + 1
 
-    random_state = np.random.RandomState(0)
+    y_test = label_binarize(y_test, classes=list(range(0,n_classes)))
 
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=random_state)
-
-    # Run classifier
-
-    classifier =  OneVsRestClassifier(estimator)
-
-    y_score = classifier.fit(X_train, y_train).decision_function(X_test)
+    y_score = classifier.predict_proba(X_test)
 
     # Compute Precision-Recall and plot curve
     precision = dict()
