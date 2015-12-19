@@ -8,6 +8,11 @@ from sklearn.preprocessing import label_binarize
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import average_precision_score
 
+
+# function for evalation and plotting of the F-score of the model
+# when dealing with skewed classes
+
+
 def fscore_plot(classifier, X_test, y_test):
 
 
